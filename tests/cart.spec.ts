@@ -30,7 +30,7 @@ test.describe('Cart Tests', () => {
    * Add Multiple Products to Cart
    * Verifies that multiple products can be added to the cart
    */
-  test('Add multiple products to cart', async ({ page }) => {
+  test('Add multiple products to cart', async () => {
     // Get 3 random products
     const products = getRandomProducts(3);
     const productNames = products.map(p => p.name);

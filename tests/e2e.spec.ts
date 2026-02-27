@@ -37,7 +37,7 @@ test.describe('End-to-End Tests', () => {
    * Complete User Journey - Browse, Add to Cart, and Purchase
    * Verifies the complete user journey from login to order completion
    */
-  test('Complete user journey - browse, add to cart, and purchase', async ({ page }) => {
+  test('Complete user journey - browse, add to cart, and purchase', async () => {
     // Step 1: Login
     const credentials = getStandardUserCredentials();
     await loginPage.navigateToLoginPage();

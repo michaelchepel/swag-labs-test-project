@@ -28,7 +28,7 @@ test.describe('Product Sorting Tests', () => {
    * Sort Products by Name (A to Z)
    * Verifies that products are sorted alphabetically from A to Z
    */
-  test('Sort products by name (A to Z)', async ({ page }) => {
+  test('Sort products by name (A to Z)', async () => {
     // Sort products by name A to Z
     await inventoryPage.sortProducts(SORT_OPTIONS.NAME_A_TO_Z);
 

@@ -23,7 +23,7 @@ test.describe('Login Tests', () => {
    * Verifies that a user can successfully log in with valid credentials
    * and is redirected to the inventory page
    */
-  test('Successful login with valid credentials', async ({ page }) => {
+  test('Successful login with valid credentials', async () => {
     // Get valid credentials
     const credentials = getStandardUserCredentials();
 

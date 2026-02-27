@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './common';
-import { SELECTORS, APP_URLS, PAGE_TITLES, SORT_OPTIONS } from '../utils/constants';
+import { SELECTORS, APP_URLS, PAGE_TITLES } from '../utils/constants';
 
 /**
  * Inventory page object for Swag Labs

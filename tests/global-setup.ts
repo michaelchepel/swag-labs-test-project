@@ -1,4 +1,3 @@
-import { FullConfig } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 
@@ -6,7 +5,7 @@ import path from 'path';
  * Global setup for Playwright tests
  * Runs once before all tests
  */
-async function globalSetup(config: FullConfig) {
+async function globalSetup() {
   console.log('🚀 Starting global setup...');
   
   // Create necessary directories if they don't exist

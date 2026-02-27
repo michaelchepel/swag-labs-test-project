@@ -45,7 +45,7 @@ test.describe('Checkout Tests', () => {
    * Complete Checkout Flow
    * Verifies the end-to-end checkout process from adding products to order completion
    */
-  test('Complete checkout flow successfully', async ({ page }) => {
+  test('Complete checkout flow successfully', async () => {
     // Get random products and checkout info
     const products = getRandomProducts(2);
     const productNames = products.map(p => p.name);
