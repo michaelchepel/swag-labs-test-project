@@ -1,6 +1,10 @@
-import credentials from '../data/credentials.json';
 import products from '../data/products.json';
 import testData from '../data/test-data.json';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 /**
  * Data helper utility for accessing test data
@@ -39,11 +43,26 @@ export interface CheckoutInfo {
  * @returns User credentials object
  */
 export function getCredentials(userType: string): UserCredentials {
-  const user = credentials[userType as keyof typeof credentials];
-  if (!user) {
-    throw new Error(`User type "${userType}" not found in credentials.json`);
+  const password = getDefaultPassword();
+  
+  // Map user types to environment variable names
+  const userEnvMap: Record<string, string> = {
+    standardUser: 'STANDARD_USER',
+    lockedOutUser: 'LOCKED_OUT_USER',
+    problemUser: 'PROBLEM_USER',
+    performanceGlitchUser: 'PERFORMANCE_GLITCH_USER',
+    errorUser: 'ERROR_USER',
+    visualUser: 'VISUAL_USER'
+  };
+  
+  const envVarName = userEnvMap[userType];
+  if (!envVarName) {
+    throw new Error(`User type "${userType}" not found`);
   }
-  return user;
+  
+  const username = getEnvVar(envVarName);
+  
+  return { username, password };
 }
 
 /**
@@ -83,7 +102,14 @@ export function getPerformanceGlitchUserCredentials(): UserCredentials {
  * @returns Array of user type names
  */
 export function getAllUserTypes(): string[] {
-  return Object.keys(credentials);
+  return [
+    'standardUser',
+    'lockedOutUser',
+    'problemUser',
+    'performanceGlitchUser',
+    'errorUser',
+    'visualUser'
+  ];
 }
 
 /**

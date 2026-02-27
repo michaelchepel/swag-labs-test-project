@@ -9,6 +9,9 @@ pnpm-lock.yaml
 .env.local
 .env.*.local
 
+# Credentials and sensitive data
+data/credentials.json
+
 # Build outputs
 dist/
 build/
