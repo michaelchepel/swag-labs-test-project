@@ -1,0 +1,20 @@
+{
+  "checkoutInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "postalCode": "12345"
+  },
+  "errorMessages": {
+    "lockedOutUser": "Epic sadface: Sorry, this user has been locked out.",
+    "invalidCredentials": "Epic sadface: Username and password do not match",
+    "emptyUsername": "Epic sadface: Username is required",
+    "emptyPassword": "Epic sadface: Password is required",
+    "emptyFirstName": "Epic sadface: First Name is required",
+    "emptyLastName": "Epic sadface: Last Name is required",
+    "emptyPostalCode": "Epic sadface: Postal Code is required"
+  },
+  "successMessages": {
+    "orderComplete": "Thank you for your order!",
+    "orderDispatched": "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+  }
+}
