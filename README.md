@@ -25,7 +25,7 @@ A production-ready test automation framework built with Playwright and TypeScrip
 - **Test Data Management**: Separate JSON files for static test data
 - **Environment Variables**: Secure credential management
 - **Custom Wait Strategies**: Robust element waiting and synchronization
-- **Comprehensive Test Coverage**: 39+ test cases covering all major functionality
+- **Comprehensive Test Coverage**: 5 test cases covering major functionality
 - **Multi-Browser Support**: Tests run on Chromium, Firefox, and WebKit
 - **CI/CD Integration**: Automated testing with GitHub Actions
 - **Detailed Reports**: HTML, JSON, and JUnit test reports
@@ -46,8 +46,7 @@ swag-labs-playwright-framework/
 │   ├── products.json               # Product catalog
 │   └── test-data.json             # Test data and messages
 ├── pages/
-│   ├── base/
-│   │   └── BasePage.ts            # Abstract base page class
+│   ├── common.ts                  # BasePage class and common utilities
 │   ├── LoginPage.ts               # Login page object
 │   ├── InventoryPage.ts           # Inventory page object
 │   ├── CartPage.ts                # Cart page object
@@ -205,61 +204,27 @@ npx playwright test --project=webkit
 ### 1. Login Tests ([`tests/login.spec.ts`](tests/login.spec.ts))
 Tests for user authentication and login functionality.
 
-- TC-001: Successful login with valid credentials
-- TC-002: Login with locked out user shows error message
-- TC-003: Login with empty username shows error message
-- TC-004: Login with empty password shows error message
-- TC-005: Login with invalid credentials shows error message
-- TC-006: Error message can be closed
-- TC-007: Verify login page elements are visible
+- Successful login with valid credentials - Verifies that a user can successfully log in and is redirected to the inventory page
 
 ### 2. Cart Tests ([`tests/cart.spec.ts`](tests/cart.spec.ts))
 Tests for shopping cart functionality.
 
-- TC-008: Add single product to cart
-- TC-009: Add multiple products to cart
-- TC-010: Remove product from cart
-- TC-011: Remove all products from cart
-- TC-012: Continue shopping from cart
-- TC-013: Verify cart item details
-- TC-014: Checkout button enabled with items in cart
-- TC-015: Cart badge updates correctly
+- Add multiple products to cart - Verifies that multiple products can be added to the cart and the cart badge updates correctly
 
 ### 3. Checkout Tests ([`tests/checkout.spec.ts`](tests/checkout.spec.ts))
 Tests for the complete checkout process.
 
-- TC-016: Complete checkout flow successfully
-- TC-017: Checkout with empty first name shows error
-- TC-018: Checkout with empty last name shows error
-- TC-019: Checkout with empty postal code shows error
-- TC-020: Cancel checkout and return to cart
-- TC-021: Cancel checkout overview and return to inventory
-- TC-022: Back to products after order completion
-- TC-023: Verify checkout summary information
+- Complete checkout flow successfully - Verifies the end-to-end checkout process from adding products to order completion
 
 ### 4. Product Sorting Tests ([`tests/sorting.spec.ts`](tests/sorting.spec.ts))
 Tests for product sorting functionality.
 
-- TC-024: Sort products by name (A to Z)
-- TC-025: Sort products by name (Z to A)
-- TC-026: Sort products by price (low to high)
-- TC-027: Sort products by price (high to low)
-- TC-028: Verify all products are displayed
-- TC-029: Verify product details are correct
-- TC-030: Multiple sorting operations work correctly
-- TC-031: Products remain in cart after sorting
+- Sort products by name (A to Z) - Verifies that products are sorted alphabetically from A to Z
 
 ### 5. End-to-End Tests ([`tests/e2e.spec.ts`](tests/e2e.spec.ts))
 Comprehensive tests covering complete user journeys.
 
-- TC-032: Complete user journey - browse, add to cart, and purchase
-- TC-033: Add and remove products multiple times
-- TC-034: Multiple checkouts in same session
-- TC-035: Browse products without purchasing
-- TC-036: Cart persistence during navigation
-- TC-037: Add all available products to cart
-- TC-038: Cart is cleared after logout
-- TC-039: Page refresh during checkout
+- Complete user journey - browse, add to cart, and purchase - Verifies the complete user journey from login to order completion
 
 ## 📄 Page Object Model
 
@@ -267,7 +232,7 @@ The framework uses the Page Object Model pattern for better test maintainability
 
 ### BasePage
 
-The [`BasePage`](pages/base/BasePage.ts) class provides common functionality for all page objects:
+The [`BasePage`](pages/common.ts) class (defined in [`pages/common.ts`](pages/common.ts:15)) provides common functionality for all page objects:
 
 - Navigation methods
 - Element interaction methods (click, fill, hover, etc.)
@@ -366,7 +331,7 @@ The framework is integrated with GitHub Actions for automated testing on every p
 - **Artifact Upload**: Test results, screenshots, videos, and reports are uploaded
 - **Report Merging**: Merged HTML report with all test results
 - **Test Results**: Published as GitHub check with pass/fail status
-- **Linting**: ESLint runs on every push
+- **Linting**: ESLint runs on every push (requires configuration file to be added)
 
 ### Workflow Triggers
 
