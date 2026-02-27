@@ -28,18 +28,19 @@ Runs the actual Playwright tests with the following features:
 - **Timeout**: 60 minutes per job
 - **Strategy**: Uses matrix strategy with 4 shards for parallel execution
 - **Browser Support**: Chromium, Firefox, and WebKit browsers
-- **Test Execution**: Runs tests using `npx playwright test --shard=${{ matrix.shard }}/4`
+- **Test Execution**: Runs tests using `npx playwright test --config=config/playwright.config.ts --shard=${{ matrix.shard }}/4`
 
 **Steps:**
 1. Checkout code
 2. Setup Node.js (version 20)
 3. Install dependencies (`npm ci`)
-4. Install Playwright browsers with dependencies
-5. Run Playwright tests (sharded)
-6. Upload test results (retained for 7 days)
-7. Upload screenshots on failure (retained for 7 days)
-8. Upload videos (retained for 7 days)
-9. Upload HTML reports (retained for 7 days)
+4. Create `.env` file with environment variables
+5. Install Playwright browsers with dependencies
+6. Run Playwright tests (sharded) with config file
+7. Upload test results (retained for 7 days)
+8. Upload screenshots on failure (retained for 7 days)
+9. Upload videos (retained for 7 days)
+10. Upload HTML reports (retained for 7 days)
 
 #### 2. Report Job
 
@@ -127,13 +128,37 @@ The workflow generates and uploads the following artifacts:
 
 ## Environment Variables
 
-The workflow uses environment variables from the repository:
+The workflow creates a `.env` file during test execution with the following environment variables:
 
-- **Test Environment**: Uses the default Playwright configuration
-- **Base URL**: Configured in `playwright.config.ts`
-- **Credentials**: Loaded from test data files (not from `.env` file which is gitignored)
+### Default Values (Built-in)
+The workflow uses default values for all environment variables, so no GitHub Secrets configuration is required:
 
-Note: The `.env` file is excluded from the repository (see [`.gitignore`](.gitignore:8)). Make sure to configure any required environment variables in your GitHub repository settings under **Settings > Secrets and variables > Actions**.
+- **BASE_URL**: `https://www.saucedemo.com`
+- **STANDARD_USER**: `standard_user`
+- **LOCKED_OUT_USER**: `locked_out_user`
+- **PROBLEM_USER**: `problem_user`
+- **PERFORMANCE_GLITCH_USER**: `performance_glitch_user`
+- **ERROR_USER**: `error_user`
+- **VISUAL_USER**: `visual_user`
+- **PASSWORD**: `secret_sauce`
+- **HEADLESS**: `true`
+- **TIMEOUT**: `30000`
+- **SCREENSHOT_ON_FAILURE_ONLY**: `true`
+- **VIDEO**: `retain-on-failure`
+
+### Optional GitHub Secrets
+You can override any of these values by adding GitHub Secrets:
+
+1. Go to your repository on GitHub
+2. Navigate to **Settings > Secrets and variables > Actions**
+3. Click **New repository secret**
+4. Add the secret name (e.g., `BASE_URL`) and value
+5. Click **Add secret**
+
+The workflow will use the GitHub Secret value if present, otherwise it falls back to the default value.
+
+### Config File
+The workflow uses the Playwright configuration file at [`config/playwright.config.ts`](config/playwright.config.ts:1) and loads environment variables from the `.env` file created during the workflow run.
 
 ## Troubleshooting
 

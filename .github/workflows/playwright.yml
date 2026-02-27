@@ -30,11 +30,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Create .env file
+        run: |
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+          echo "STANDARD_USER=${{ secrets.STANDARD_USER }}" >> .env
+          echo "LOCKED_OUT_USER=${{ secrets.LOCKED_OUT_USER }}" >> .env
+          echo "PROBLEM_USER=${{ secrets.PROBLEM_USER }}" >> .env
+          echo "PERFORMANCE_GLITCH_USER=${{ secrets.PERFORMANCE_GLITCH_USER }}" >> .env
+          echo "ERROR_USER=${{ secrets.ERROR_USER }}" >> .env
+          echo "VISUAL_USER=${{ secrets.VISUAL_USER }}" >> .env
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
+          echo "HEADLESS=true" >> .env
+          echo "TIMEOUT=30000" >> .env
+          echo "SCREENSHOT_ON_FAILURE_ONLY=true" >> .env
+          echo "VIDEO=retain-on-failure" >> .env
+        env:
+          BASE_URL: https://www.saucedemo.com
+          STANDARD_USER: standard_user
+          LOCKED_OUT_USER: locked_out_user
+          PROBLEM_USER: problem_user
+          PERFORMANCE_GLITCH_USER: performance_glitch_user
+          ERROR_USER: error_user
+          VISUAL_USER: visual_user
+          PASSWORD: secret_sauce
+
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium firefox webkit
+        run: npm run install-browsers
 
       - name: Run Playwright tests
-        run: npx playwright test --shard=${{ matrix.shard }}/4
+        run: npx playwright test --config=config/playwright.config.ts --shard=${{ matrix.shard }}/4
+        env:
+          CI: true
 
       - name: Upload test results
         if: always()
@@ -75,6 +101,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Download all test results
         uses: actions/download-artifact@v4
