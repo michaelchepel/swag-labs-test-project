@@ -29,7 +29,7 @@ export default defineConfig({
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['json', { outputFile: 'test-results/results.json' }],
-    ['junit', { outputFile: 'test-results/junit.xml' }],
+    ['junit', { outputFile: process.env.SHARD_INDEX ? `test-results/junit-shard-${process.env.SHARD_INDEX}.xml` : 'test-results/junit.xml' }],
   ],
 
   // Shared settings for all tests
