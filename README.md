@@ -1,6 +1,6 @@
 # Swag Labs Playwright Testing Framework
 
-A production-ready test automation framework built with Playwright and TypeScript for testing the [Swag Labs](https://www.saucedemo.com/) e-commerce website.
+A production-ready test automation framework built with Playwright and TypeScript for testing the https://www.saucedemo.com/
 
 ## Prerequisites
 
