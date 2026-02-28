@@ -43,11 +43,6 @@ npm test
 npm run test:headed
 ```
 
-### Run tests with UI mode
-```bash
-npm run test:ui
-```
-
 ### Run tests in debug mode
 ```bash
 npm run test:debug
@@ -61,11 +56,6 @@ npm run test:report
 ### Run specific test file
 ```bash
 npx playwright test tests/login.spec.ts
-```
-
-### Run tests with specific pattern
-```bash
-npx playwright test --grep "login"
 ```
 
 ### Run tests on specific browser
