@@ -4,11 +4,6 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { getStandardUserCredentials, getRandomProducts, calculateTotalPrice } from '../utils/data-helper';
 
-/**
- * Test Suite: Shopping Cart Functionality
- * Tests for adding products to cart and cart management
- */
-
 test.describe('Cart Tests', () => {
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
@@ -26,10 +21,6 @@ test.describe('Cart Tests', () => {
     await inventoryPage.assertInventoryPageLoaded();
   });
 
-  /**
-   * Add Multiple Products to Cart
-   * Verifies that multiple products can be added to the cart
-   */
   test('Add multiple products to cart', async () => {
     // Get 3 random products
     const products = getRandomProducts(3);

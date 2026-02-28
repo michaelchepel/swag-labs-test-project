@@ -11,11 +11,6 @@ import {
   getCheckoutInfo,
 } from '../utils/data-helper';
 
-/**
- * Test Suite: End-to-End Scenarios
- * Comprehensive tests covering multiple user flows
- */
-
 test.describe('End-to-End Tests', () => {
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
@@ -33,10 +28,6 @@ test.describe('End-to-End Tests', () => {
     checkoutCompletePage = new CheckoutCompletePage(page);
   });
 
-  /**
-   * Complete User Journey - Browse, Add to Cart, and Purchase
-   * Verifies the complete user journey from login to order completion
-   */
   test('Complete user journey - browse, add to cart, and purchase', async () => {
     // Step 1: Login
     const credentials = getStandardUserCredentials();

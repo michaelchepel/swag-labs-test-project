@@ -1,10 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-/**
- * Global teardown for Playwright tests
- * Runs once after all tests
- */
 async function globalTeardown() {
   console.log('Starting global teardown...');
 

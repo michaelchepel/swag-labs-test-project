@@ -2,12 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
-/**
- * Playwright configuration for Swag Labs test automation framework
- */
 export default defineConfig({
   // Test directory
   testDir: './tests',

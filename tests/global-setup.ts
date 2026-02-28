@@ -1,10 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-/**
- * Global setup for Playwright tests
- * Runs once before all tests
- */
 async function globalSetup() {
   console.log('Starting global setup...');
 

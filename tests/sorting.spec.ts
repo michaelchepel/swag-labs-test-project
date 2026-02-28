@@ -4,11 +4,6 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { getStandardUserCredentials } from '../utils/data-helper';
 import { SORT_OPTIONS } from '../utils/constants';
 
-/**
- * Test Suite: Product Sorting Functionality
- * Tests for product sorting on the inventory page
- */
-
 test.describe('Product Sorting Tests', () => {
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
@@ -24,10 +19,6 @@ test.describe('Product Sorting Tests', () => {
     await inventoryPage.assertInventoryPageLoaded();
   });
 
-  /**
-   * Sort Products by Name (A to Z)
-   * Verifies that products are sorted alphabetically from A to Z
-   */
   test('Sort products by name (A to Z)', async () => {
     // Sort products by name A to Z
     await inventoryPage.sortProducts(SORT_OPTIONS.NAME_A_TO_Z);

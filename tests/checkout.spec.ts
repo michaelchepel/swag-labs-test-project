@@ -13,11 +13,6 @@ import {
   getOrderDispatchedMessage,
 } from '../utils/data-helper';
 
-/**
- * Test Suite: Checkout Functionality
- * Tests for the complete checkout process
- */
-
 test.describe('Checkout Tests', () => {
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
@@ -41,10 +36,6 @@ test.describe('Checkout Tests', () => {
     await inventoryPage.assertInventoryPageLoaded();
   });
 
-  /**
-   * Complete Checkout Flow
-   * Verifies the end-to-end checkout process from adding products to order completion
-   */
   test('Complete checkout flow successfully', async () => {
     // Get random products and checkout info
     const products = getRandomProducts(2);

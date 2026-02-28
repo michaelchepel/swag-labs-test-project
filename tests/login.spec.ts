@@ -3,11 +3,6 @@ import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { getStandardUserCredentials } from '../utils/data-helper';
 
-/**
- * Test Suite: Login Functionality
- * Tests for user login and authentication
- */
-
 test.describe('Login Tests', () => {
   let loginPage: LoginPage;
   let inventoryPage: InventoryPage;
@@ -18,11 +13,6 @@ test.describe('Login Tests', () => {
     await loginPage.navigateToLoginPage();
   });
 
-  /**
-   * Successful Login with Valid Credentials
-   * Verifies that a user can successfully log in with valid credentials
-   * and is redirected to the inventory page
-   */
   test('Successful login with valid credentials', async () => {
     // Get valid credentials
     const credentials = getStandardUserCredentials();
