@@ -6,8 +6,8 @@ import path from 'path';
  * Runs once before all tests
  */
 async function globalSetup() {
-  console.log('🚀 Starting global setup...');
-  
+  console.log('Starting global setup...');
+
   // Create necessary directories if they don't exist
   const directories = [
     'test-results',
@@ -21,12 +21,12 @@ async function globalSetup() {
     const dirPath = path.join(process.cwd(), dir);
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true });
-      console.log(`📁 Created directory: ${dir}`);
+      console.log(`Created directory: ${dir}`);
     }
   });
 
   // Log test environment information
-  console.log('📋 Test Environment Information:');
+  console.log('Test Environment Information:');
   console.log(`   Base URL: ${process.env.BASE_URL || 'https://www.saucedemo.com'}`);
   console.log(`   Headless: ${process.env.HEADLESS !== 'false'}`);
   console.log(`   Browser: ${process.env.BROWSER || 'chromium'}`);
@@ -45,11 +45,11 @@ async function globalSetup() {
           fs.unlinkSync(filePath);
         }
       });
-      console.log('🧹 Cleared previous test results');
+      console.log('Cleared previous test results');
     }
   }
 
-  console.log('✅ Global setup completed successfully');
+  console.log('Global setup completed successfully');
 }
 
 export default globalSetup;

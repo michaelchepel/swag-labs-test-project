@@ -99,19 +99,6 @@ export const SELECTORS = {
 } as const;
 
 /**
- * Error messages
- */
-export const ERROR_MESSAGES = {
-  LOCKED_OUT_USER: 'Epic sadface: Sorry, this user has been locked out.',
-  INVALID_CREDENTIALS: 'Epic sadface: Username and password do not match',
-  EMPTY_USERNAME: 'Epic sadface: Username is required',
-  EMPTY_PASSWORD: 'Epic sadface: Password is required',
-  EMPTY_FIRST_NAME: 'Epic sadface: First Name is required',
-  EMPTY_LAST_NAME: 'Epic sadface: Last Name is required',
-  EMPTY_POSTAL_CODE: 'Epic sadface: Postal Code is required',
-} as const;
-
-/**
  * Success messages
  */
 export const SUCCESS_MESSAGES = {
@@ -127,16 +114,4 @@ export const SORT_OPTIONS = {
   NAME_Z_TO_A: 'za',
   PRICE_LOW_TO_HIGH: 'lohi',
   PRICE_HIGH_TO_LOW: 'hilo',
-} as const;
-
-/**
- * User types
- */
-export const USER_TYPES = {
-  STANDARD: 'standard_user',
-  LOCKED_OUT: 'locked_out_user',
-  PROBLEM: 'problem_user',
-  PERFORMANCE_GLITCH: 'performance_glitch_user',
-  ERROR: 'error_user',
-  VISUAL: 'visual_user',
 } as const;

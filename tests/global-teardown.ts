@@ -6,14 +6,14 @@ import path from 'path';
  * Runs once after all tests
  */
 async function globalTeardown() {
-  console.log('🧹 Starting global teardown...');
+  console.log('Starting global teardown...');
 
   // Log test completion summary
-  console.log('✅ All tests completed');
-  console.log(`📊 Test results available in: ${path.join(process.cwd(), 'test-results')}`);
-  console.log(`📸 Screenshots available in: ${path.join(process.cwd(), 'screenshots')}`);
-  console.log(`🎬 Videos available in: ${path.join(process.cwd(), 'videos')}`);
-  console.log(`📝 HTML report available in: ${path.join(process.cwd(), 'playwright-report')}`);
+  console.log('All tests completed');
+  console.log(`Test results available in: ${path.join(process.cwd(), 'test-results')}`);
+  console.log(`Screenshots available in: ${path.join(process.cwd(), 'screenshots')}`);
+  console.log(`Videos available in: ${path.join(process.cwd(), 'videos')}`);
+  console.log(`HTML report available in: ${path.join(process.cwd(), 'playwright-report')}`);
 
   // Optional: Generate test summary file
   const summary = {
@@ -29,9 +29,9 @@ async function globalTeardown() {
 
   const summaryPath = path.join(process.cwd(), 'test-results', 'test-summary.json');
   fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2));
-  console.log(`📄 Test summary saved to: ${summaryPath}`);
+  console.log(`Test summary saved to: ${summaryPath}`);
 
-  console.log('✅ Global teardown completed successfully');
+  console.log('Global teardown completed successfully');
 }
 
 export default globalTeardown;

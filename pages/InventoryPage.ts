@@ -54,23 +54,6 @@ export class InventoryPage extends BasePage {
   }
 
   /**
-   * Remove a product from the shopping cart by name
-   * @param productName - Name of the product to remove
-   */
-  async removeProductFromCart(productName: string): Promise<void> {
-    const productElements = await this.getAllElements(SELECTORS.INVENTORY_ITEM);
-
-    for (const product of productElements) {
-      const name = await product.locator(SELECTORS.INVENTORY_ITEM_NAME).textContent();
-      if (name?.trim() === productName) {
-        const removeButton = product.locator(SELECTORS.REMOVE_BUTTON);
-        await this.clickLocator(removeButton);
-        break;
-      }
-    }
-  }
-
-  /**
    * Get the number of items in the shopping cart
    * @returns Number of items in cart
    */
@@ -81,43 +64,6 @@ export class InventoryPage extends BasePage {
       return text ? parseInt(text, 10) : 0;
     }
     return 0;
-  }
-
-  /**
-   * Check if a specific product is displayed
-   * @param productName - Name of the product to check
-   * @returns True if product is visible, false otherwise
-   */
-  async isProductDisplayed(productName: string): Promise<boolean> {
-    const productElements = await this.getAllElements(SELECTORS.INVENTORY_ITEM);
-
-    for (const product of productElements) {
-      const name = await product.locator(SELECTORS.INVENTORY_ITEM_NAME).textContent();
-      if (name?.trim() === productName) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * Check if a product has been added to cart (remove button is visible)
-   * @param productName - Name of the product to check
-   * @returns True if product is in cart, false otherwise
-   */
-  async isProductInCart(productName: string): Promise<boolean> {
-    const productElements = await this.getAllElements(SELECTORS.INVENTORY_ITEM);
-
-    for (const product of productElements) {
-      const name = await product.locator(SELECTORS.INVENTORY_ITEM_NAME).textContent();
-      if (name?.trim() === productName) {
-        const removeButton = product.locator(SELECTORS.REMOVE_BUTTON);
-        return await removeButton.isVisible();
-      }
-    }
-
-    return false;
   }
 
   /**
@@ -136,81 +82,11 @@ export class InventoryPage extends BasePage {
   }
 
   /**
-   * Get the price of a specific product
-   * @param productName - Name of the product
-   * @returns Product price as a string
-   */
-  async getProductPrice(productName: string): Promise<string> {
-    const productElements = await this.getAllElements(SELECTORS.INVENTORY_ITEM);
-
-    for (const product of productElements) {
-      const name = await product.locator(SELECTORS.INVENTORY_ITEM_NAME).textContent();
-      if (name?.trim() === productName) {
-        const price = await product.locator(SELECTORS.INVENTORY_ITEM_PRICE).textContent();
-        return price?.trim() || '';
-      }
-    }
-
-    return '';
-  }
-
-  /**
-   * Get the description of a specific product
-   * @param productName - Name of the product
-   * @returns Product description
-   */
-  async getProductDescription(productName: string): Promise<string> {
-    const productElements = await this.getAllElements(SELECTORS.INVENTORY_ITEM);
-
-    for (const product of productElements) {
-      const name = await product.locator(SELECTORS.INVENTORY_ITEM_NAME).textContent();
-      if (name?.trim() === productName) {
-        const description = await product.locator(SELECTORS.INVENTORY_ITEM_DESC).textContent();
-        return description?.trim() || '';
-      }
-    }
-
-    return '';
-  }
-
-  /**
-   * Click on a product to view details
-   * @param productName - Name of the product to click
-   */
-  async clickProduct(productName: string): Promise<void> {
-    const productElements = await this.getAllElements(SELECTORS.INVENTORY_ITEM);
-
-    for (const product of productElements) {
-      const name = await product.locator(SELECTORS.INVENTORY_ITEM_NAME).textContent();
-      if (name?.trim() === productName) {
-        await this.clickLocator(product.locator(SELECTORS.INVENTORY_ITEM_NAME));
-        break;
-      }
-    }
-  }
-
-  /**
    * Check if shopping cart badge is visible
    * @returns True if cart badge is visible, false otherwise
    */
   async isCartBadgeVisible(): Promise<boolean> {
     return await this.isElementVisible(SELECTORS.CART_BADGE);
-  }
-
-  /**
-   * Verify that inventory page is loaded
-   * @returns True if inventory page is loaded, false otherwise
-   */
-  async isPageLoaded(): Promise<boolean> {
-    const isInventoryListVisible = await this.isElementVisible(SELECTORS.INVENTORY_LIST);
-    const isCartIconVisible = await this.isElementVisible(SELECTORS.SHOPPING_CART_LINK);
-    const pageTitle = await this.getPageTitle();
-
-    return (
-      isInventoryListVisible &&
-      isCartIconVisible &&
-      pageTitle === PAGE_TITLES.INVENTORY
-    );
   }
 
   /**
@@ -230,5 +106,21 @@ export class InventoryPage extends BasePage {
    */
   async assertOnInventoryPage(): Promise<void> {
     await this.assertURLContains(APP_URLS.INVENTORY);
+  }
+
+  /**
+   * Verify that inventory page is loaded
+   * @returns True if inventory page is loaded, false otherwise
+   */
+  async isPageLoaded(): Promise<boolean> {
+    const isInventoryListVisible = await this.isElementVisible(SELECTORS.INVENTORY_LIST);
+    const isCartIconVisible = await this.isElementVisible(SELECTORS.SHOPPING_CART_LINK);
+    const pageTitle = await this.getPageTitle();
+
+    return (
+      isInventoryListVisible &&
+      isCartIconVisible &&
+      pageTitle === PAGE_TITLES.INVENTORY
+    );
   }
 }

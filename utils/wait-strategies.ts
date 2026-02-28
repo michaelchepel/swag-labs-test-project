@@ -1,4 +1,4 @@
-import { Page, Locator, WaitForOptions } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { TIMEOUTS } from './constants';
 
 /**
@@ -173,7 +173,7 @@ export async function waitForElementCount(
 ): Promise<void> {
   const element = page.locator(selector);
   await element.waitFor({ state: 'attached', timeout });
-  await element.evaluate((el, count) => {
+  await element.evaluate((_, count) => {
     const actualCount = document.querySelectorAll(selector).length;
     if (actualCount !== count) {
       throw new Error(`Expected ${count} elements, found ${actualCount}`);

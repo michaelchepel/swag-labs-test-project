@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { BasePage } from './common';
-import { SELECTORS, APP_URLS, PAGE_TITLES, SUCCESS_MESSAGES } from '../utils/constants';
+import { SELECTORS, PAGE_TITLES, SUCCESS_MESSAGES } from '../utils/constants';
 
 /**
  * Checkout complete page object for Swag Labs
@@ -9,13 +9,6 @@ import { SELECTORS, APP_URLS, PAGE_TITLES, SUCCESS_MESSAGES } from '../utils/con
 export class CheckoutCompletePage extends BasePage {
   constructor(page: Page) {
     super(page);
-  }
-
-  /**
-   * Navigate to checkout complete page
-   */
-  async navigateToCheckoutComplete(): Promise<void> {
-    await this.navigateTo(APP_URLS.CHECKOUT_COMPLETE);
   }
 
   /**
@@ -37,38 +30,6 @@ export class CheckoutCompletePage extends BasePage {
   }
 
   /**
-   * Check if complete header is visible
-   * @returns True if complete header is visible, false otherwise
-   */
-  async isCompleteHeaderVisible(): Promise<boolean> {
-    return await this.isElementVisible(SELECTORS.COMPLETE_HEADER);
-  }
-
-  /**
-   * Check if complete text is visible
-   * @returns True if complete text is visible, false otherwise
-   */
-  async isCompleteTextVisible(): Promise<boolean> {
-    return await this.isElementVisible(SELECTORS.COMPLETE_TEXT);
-  }
-
-  /**
-   * Check if back home button is visible
-   * @returns True if back home button is visible, false otherwise
-   */
-  async isBackHomeButtonVisible(): Promise<boolean> {
-    return await this.isElementVisible(SELECTORS.BACK_HOME_BUTTON);
-  }
-
-  /**
-   * Check if back home button is enabled
-   * @returns True if back home button is enabled, false otherwise
-   */
-  async isBackHomeButtonEnabled(): Promise<boolean> {
-    return await this.isElementEnabled(SELECTORS.BACK_HOME_BUTTON);
-  }
-
-  /**
    * Click back home button to return to inventory
    */
   async clickBackHome(): Promise<void> {
@@ -76,31 +37,15 @@ export class CheckoutCompletePage extends BasePage {
   }
 
   /**
-   * Verify that order completion message is displayed
-   * @returns True if order completion message is displayed, false otherwise
-   */
-  async isOrderCompleteMessageDisplayed(): Promise<boolean> {
-    const header = await this.getCompleteHeader();
-    return header === SUCCESS_MESSAGES.ORDER_COMPLETE;
-  }
-
-  /**
-   * Verify that order dispatched message is displayed
-   * @returns True if order dispatched message is displayed, false otherwise
-   */
-  async isOrderDispatchedMessageDisplayed(): Promise<boolean> {
-    const text = await this.getCompleteText();
-    return text === SUCCESS_MESSAGES.ORDER_DISPATCHED;
-  }
-
-  /**
    * Verify that both success messages are displayed
    * @returns True if both success messages are displayed, false otherwise
    */
   async areSuccessMessagesDisplayed(): Promise<boolean> {
+    const header = await this.getCompleteHeader();
+    const text = await this.getCompleteText();
     return (
-      await this.isOrderCompleteMessageDisplayed() &&
-      await this.isOrderDispatchedMessageDisplayed()
+      header === SUCCESS_MESSAGES.ORDER_COMPLETE &&
+      text === SUCCESS_MESSAGES.ORDER_DISPATCHED
     );
   }
 
@@ -109,9 +54,9 @@ export class CheckoutCompletePage extends BasePage {
    * @returns True if checkout complete page is loaded, false otherwise
    */
   async isPageLoaded(): Promise<boolean> {
-    const isHeaderVisible = await this.isCompleteHeaderVisible();
-    const isTextVisible = await this.isCompleteTextVisible();
-    const isBackHomeVisible = await this.isBackHomeButtonVisible();
+    const isHeaderVisible = await this.isElementVisible(SELECTORS.COMPLETE_HEADER);
+    const isTextVisible = await this.isElementVisible(SELECTORS.COMPLETE_TEXT);
+    const isBackHomeVisible = await this.isElementVisible(SELECTORS.BACK_HOME_BUTTON);
     const pageTitle = await this.getPageTitle();
 
     return (
@@ -133,20 +78,5 @@ export class CheckoutCompletePage extends BasePage {
     if (pageTitle !== PAGE_TITLES.CHECKOUT_COMPLETE) {
       throw new Error(`Expected page title "${PAGE_TITLES.CHECKOUT_COMPLETE}", got "${pageTitle}"`);
     }
-  }
-
-  /**
-   * Assert that URL contains checkout complete path
-   */
-  async assertOnCheckoutCompletePage(): Promise<void> {
-    await this.assertURLContains(APP_URLS.CHECKOUT_COMPLETE);
-  }
-
-  /**
-   * Assert that order completion message is displayed
-   */
-  async assertOrderComplete(): Promise<void> {
-    await this.assertElementHasText(SELECTORS.COMPLETE_HEADER, SUCCESS_MESSAGES.ORDER_COMPLETE);
-    await this.assertElementHasText(SELECTORS.COMPLETE_TEXT, SUCCESS_MESSAGES.ORDER_DISPATCHED);
   }
 }
